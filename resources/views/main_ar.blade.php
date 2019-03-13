@@ -167,12 +167,12 @@
                                 <small>التسجيل عن طريق</small>
                             </div>
                             <div class="btn-wrapper text-center">
-                                <a href="{{ url('/auth/facebook') }}" class="btn btn-neutral btn-icon">
+                           <!--     <a href="{{ url('/auth/facebook') }}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon">
                                         <img src="{{asset('assets/img/icons/common/facebook.svg')}}">
                                     </span>
                                     <span class="btn-inner--text modal-social-text">Facebook</span>
-                                </a>
+                                </a> -->
                                 <a href="{{ url('/auth/google') }}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon">
                                         <img src="{{asset('assets/img/icons/common/google.svg')}}">
@@ -218,13 +218,15 @@
         </div>
     </div>
 
+    <!-- Back to top -->
+    <button class="back-to-top" type="button"></button>
 
     <footer>
         <div class="container">
         <div class="row">
             <div class="col-4">
                 <span style="font-weight:600;">
-                    Contribute on <a href="https://github.com/SalaheddineBoukhoulda/22fevrier2019" target="_blank">GITHUB: <img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a> 
+                    Contribute on <a href="https://github.com/22fevrier2019/22fevrier2019" target="_blank" >GITHUB: <img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a> 
                 </span>
             </div>
             <div class="col-4">
@@ -428,6 +430,25 @@
         function whiteChairJquery(target_var){
             target_var.removeClass('purple-dislike');
         }
+
+        // Back to top
+        var amountScrolled = 200;
+        var amountScrolledNav = 25;
+
+        $(window).scroll(function() {
+        if ( $(window).scrollTop() > amountScrolled ) {
+            $('button.back-to-top').addClass('show');
+        } else {
+            $('button.back-to-top').removeClass('show');
+        }
+        });
+
+        $('button.back-to-top').click(function() {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+        });
 
     });
 
