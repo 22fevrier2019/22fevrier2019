@@ -45,6 +45,11 @@ Route::post('/revendication/create',[
     'as' => 'revendication.create'
 ]);
 
+Route::post('/revendication/create/fr',[
+    'uses' => 'RevendicationController@createFr',
+    'as' => 'revendication.create.fr'
+]);
+
 
 Route::post('/revendication/like',[
     'uses' => 'RevendicationController@like'

@@ -33,6 +33,17 @@
     <meta property="og:title" content="22 Fevrier 2019" />
     <meta property="og:description" content="A website for free Algerians" />
     <meta property="og:image" content="{{asset('assets/img/share.png')}}" />
+    <!-- Hotjar Tracking Code for https://22fevrier2019.org/ -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1236816,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136151161-1"></script>
     <script>
@@ -167,12 +178,12 @@
                                 <small>التسجيل عن طريق</small>
                             </div>
                             <div class="btn-wrapper text-center">
-                           <!--     <a href="{{ url('/auth/facebook') }}" class="btn btn-neutral btn-icon">
+                               <a href="{{ url('/auth/facebook') }}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon">
                                         <img src="{{asset('assets/img/icons/common/facebook.svg')}}">
                                     </span>
                                     <span class="btn-inner--text modal-social-text">Facebook</span>
-                                </a> -->
+                                </a>
                                 <a href="{{ url('/auth/google') }}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon">
                                         <img src="{{asset('assets/img/icons/common/google.svg')}}">
@@ -241,7 +252,7 @@
         </div>
         </div>
         <div> 
-            <p class="footer-text">© Copyright 2019 – <a href="#" id="codzone">Co<span id="green-d">D</span><span id="red-z">Z</span>one</a></p>
+            <p class="footer-text">© Copyright 2019 – 22fevrier2019</p>
         </div>
     </footer>
 

@@ -17,8 +17,17 @@ class RevendicationController extends Controller
             'content' => $request->content,
             'user_id' => Auth::id()
         ]);
+        return redirect('/ar/newest')->with('revendications',Revendication::orderBy('created_at','desc')->get());
+    }
+
+
+    public function createFr(Request $request){
+        Revendication::create([
+            'content' => $request->content,
+            'user_id' => Auth::id()
+        ]);
         $revendications = Revendication::withCount('likes')->orderBy('likes_count', 'desc')->get();
-        return redirect()->back()->with('revendications',$revendications);
+        return redirect('/fr/newest')->with('revendications',Revendication::orderBy('created_at','desc')->get());
     }
 
 
