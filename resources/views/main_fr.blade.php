@@ -71,6 +71,30 @@
         </div>
     </nav>
 
+    <div class="container">
+        <div class="row" style="padding-left: 0px; padding-right: 0px;">
+            <div class="col-12">
+                @if(Session::has('created_rev'))
+                <div class="alert alert-success alert-dismissible fade show text-center mt-3" role="alert">
+                    <span class="alert-inner--text" style="font-size:14px;">Votre revendication a été ajoutée avec succès</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span class="alert-inner--icon" style="margin: 0 20px;"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                </div>
+                @else
+                <div class="alert alert-dismissible fade show text-center mt-3" role="alert" style="background-color: #F44336;">
+                    <span class="alert-inner--text" style="font-size:14px;"><strong>Avertissement:</strong>  Nous effectuerons plusieurs mises à jour à fin de répondre à tous vos besoins.</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span class="alert-inner--icon" style="margin: 0 20px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
     <div class="container misc">
         <div class="row">
             <div class="col-10 col-sm-12 mx-auto my-3">

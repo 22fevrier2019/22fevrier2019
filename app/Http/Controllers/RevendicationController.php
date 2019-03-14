@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\User;
 use App\Revendication;
 use App\Like;
@@ -17,6 +18,7 @@ class RevendicationController extends Controller
             'content' => $request->content,
             'user_id' => Auth::id()
         ]);
+        Session::flash('created_rev','true');
         return redirect('/ar/newest')->with('revendications',Revendication::orderBy('created_at','desc')->get());
     }
 
@@ -27,6 +29,7 @@ class RevendicationController extends Controller
             'user_id' => Auth::id()
         ]);
         $revendications = Revendication::withCount('likes')->orderBy('likes_count', 'desc')->get();
+        Session::flash('created_rev','true');
         return redirect('/fr/newest')->with('revendications',Revendication::orderBy('created_at','desc')->get());
     }
 
