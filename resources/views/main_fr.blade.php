@@ -80,11 +80,11 @@
     <div class="container">
         <div class="row" style="padding-left: 0px; padding-right: 0px;">
             <div class="col-12 text-center my-3">
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;" class="text-left">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_s-xclick">
                     <input type="hidden" name="hosted_button_id" value="XGYSKR4FZB5HN">
-                    <input width="128" height="49" type="image" src="{{asset('assets/img/paypal-donate.png')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" id="paypal-button">
-                    <img alt="" border="0" src="{{asset('assets/img/paypal-donate.png')}}" width="1" height="1">
+                    <input id="paypal-button" width="128" height="49" type="image" src="{{asset('assets/img/paypal-donate.png')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
             </div>
             <div class="col-12">
