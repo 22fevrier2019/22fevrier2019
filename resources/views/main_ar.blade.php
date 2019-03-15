@@ -28,11 +28,17 @@
 
     <!-- Facebook OpenGraph -->
     <meta property="og:url" content="https://22fevrier2019.org/" />
-     <meta property="fb:app_id" content="546361825856562" />
+    <meta property="fb:app_id" content="546361825856562" />
   	<meta property="og:type" content="website" />
     <meta property="og:title" content="22 Fevrier 2019" />
     <meta property="og:description" content="A website for free Algerians" />
     <meta property="og:image" content="{{asset('assets/img/share.png')}}" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="22 Fevrier 2019">
+    <meta name="twitter:description" content="A website for free Algerians.">
+    <meta name="twitter:image" content="{{asset('assets/img/share.png')}}">
+    <meta name="twitter:domain" content="22fevrier2019.org">
     <!-- Hotjar Tracking Code for https://22fevrier2019.org/ -->
     <script>
         (function(h,o,t,j,a,r){
@@ -72,6 +78,14 @@
 
     <div class="container">
         <div class="row" style="padding-left: 0px; padding-right: 0px;">
+            <div class="col-12 text-center my-3">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;" class="text-left">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="XGYSKR4FZB5HN">
+                    <input width="160" height="62" type="image" src="{{asset('assets/img/paypal-donate.png')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" id="paypal-button">
+                    <img alt="" border="0" src="{{asset('assets/img/paypal-donate.png')}}" width="1" height="1">
+                </form>
+            </div>
             <div class="col-12">
                 @if(Session::has('created_rev'))
                 <div class="alert alert-success alert-dismissible fade show text-center mt-3" role="alert">
@@ -139,18 +153,31 @@
                         <p class="single-rev-text">{{$revendication->content}}</p>
                     </div>
                     <div class="single-rev-reactions-container">
-                        <span class="love-react">
-                            <span class="love-react-icon">
-                                <i id="{{'like-icon-' . $i}}" class="{{\App\Like::where('user_id',Auth::id())->where('revendication_id',$revendication->id)->first() != null ? 'fa fa-heart red-like like-reaction' : 'fa fa-heart-o like-reaction'}}" aria-hidden="true"></i>
-                             </span>
-                            <span class="love-react-total" id="{{'love-react-total-' . $i}}">{{$revendication->likes->count()}}</span>
-                        </span>
-                        <span class="chair-reaction">
-                            <span class="chair-react-icon">
-                                <i id="{{'dislike-icon-' . $i}}" class="{{\App\Dislike::where('user_id',Auth::id())->where('revendication_id',$revendication->id)->first() != null ? 'fa fa-thumbs-down purple-dislike dislike-reaction' : 'fa fa-thumbs-down dislike-reaction'}}" aria-hidden="true"></i>
-                            </span>
-                            <span class="chair-react-total" id="{{'chair-react-total-' . $i}}">{{$revendication->dislikes->count()}}</span>
-                        </span>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 col-12 col-rev-icons">
+                                    <span class="love-react">
+                                        <span class="love-react-icon">
+                                            <i id="{{'like-icon-' . $i}}" class="{{\App\Like::where('user_id',Auth::id())->where('revendication_id',$revendication->id)->first() != null ? 'fa fa-heart red-like like-reaction' : 'fa fa-heart-o like-reaction'}}" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="love-react-total" id="{{'love-react-total-' . $i}}">{{$revendication->likes->count()}}</span>
+                                    </span>
+                                    <div style="display:inline;">
+                                        <span class="chair-reaction">
+                                            <span class="chair-react-icon">
+                                                <i id="{{'dislike-icon-' . $i}}" class="{{\App\Dislike::where('user_id',Auth::id())->where('revendication_id',$revendication->id)->first() != null ? 'fa fa-thumbs-down purple-dislike dislike-reaction' : 'fa fa-thumbs-down dislike-reaction'}}" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="chair-react-total" id="{{'chair-react-total-' . $i}}">{{$revendication->dislikes->count()}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12 col-rev-share">
+                                    {!!Share::page('https://22fevrier2019.org', $revendication->content, [], '<ul class="social-share-icons share-rev-buttons" style="margin-bottom:0; margin-left: 0; padding-left:0;">', '</ul>')
+                                    ->twitter()
+                                    !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

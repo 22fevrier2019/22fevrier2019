@@ -199,6 +199,31 @@ button.back-to-top.show:active {
   -moz-box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.25);
 }
 
+.share-rev-buttons img{
+  width: 35px;
+  height: 35px;
+}
+
+.col-rev-share{
+  text-align: right !important;
+}
+
+.col-rev-icons{
+  text-align: left !important;
+}
+
+#paypal-button{
+  border: none;
+  border-style: none;
+  outline-width: 0;
+}
+
+#paypal-button:active{
+  border: none;
+  border-style: none;
+  outline-width: 0;
+}
+
 @media screen and (max-width: 576px){
   .single-rev-text{
     font-size: 1rem !important;
@@ -246,6 +271,18 @@ button.back-to-top.show:active {
 
   .share-text{
     display: inline;
+  }
+}
+
+@media screen and (max-width: 540px){
+  .col-rev-share{
+    text-align: center !important;
+    margin-top: 10px;
+  }
+  
+  .col-rev-icons{
+    text-align: center !important;
+    margin-top: 20px;
   }
 }
 
