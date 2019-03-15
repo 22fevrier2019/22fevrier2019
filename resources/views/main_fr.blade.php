@@ -83,7 +83,7 @@
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;" class="text-left">
                     <input type="hidden" name="cmd" value="_s-xclick">
                     <input type="hidden" name="hosted_button_id" value="XGYSKR4FZB5HN">
-                    <input width="160" height="62" type="image" src="{{asset('assets/img/paypal-donate.png')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" id="paypal-button">
+                    <input width="128" height="49" type="image" src="{{asset('assets/img/paypal-donate.png')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" id="paypal-button">
                     <img alt="" border="0" src="{{asset('assets/img/paypal-donate.png')}}" width="1" height="1">
                 </form>
             </div>
@@ -173,9 +173,9 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-12 col-rev-share">
-                                    {!!Share::page('https://22fevrier2019.org', $revendication->content, [], '<ul class="social-share-icons share-rev-buttons" style="margin-bottom:0; margin-left: 0; padding-left:0;">', '</ul>')
+                                {!!Share::page('https://22fevrier2019.org', $revendication->content . " \n#22fevrier2019", [], '<ul class="social-share-icons share-rev-buttons" style="margin-bottom:0; margin-left: 0; padding-left:0;">', '</ul>')
                                     ->twitter()
-                                    !!}
+                                !!}
                                 </div>
                             </div>
                         </div>
@@ -312,6 +312,8 @@
 
     <!-- Theme JS -->
     <script src="{{asset('/assets/js/argon.js')}}"></script>
+    <!-- Laravel Share -->
+    <script src="{{ asset('js/share.js') }}"></script>
 
     <script>
     $(document).ready(function() {
