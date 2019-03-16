@@ -37,12 +37,14 @@ body{
   background: #fff;
   border-radius: .25rem;
   box-shadow: rgba(0,0,0,.1) 0 0 0 1px, rgba(0,0,0,.1) 0 4px 16px;
+  word-break: break-word;
 }
 
 .my-single-rev-container{
   background: #fff;
   border-radius: .25rem;
   box-shadow: rgba(213, 0, 0,.4) 0 0 0 1px, rgba(213, 0, 0,.4) 0 4px 16px;
+  word-break: break-word;
 }
 
 
