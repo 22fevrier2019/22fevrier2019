@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>22Fevrier2019</title>
@@ -79,14 +79,6 @@
 
     <div class="container">
         <div class="row" style="padding-left: 0px; padding-right: 0px;">
-            <div class="col-12 text-center my-3">
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="XGYSKR4FZB5HN">
-                    <input id="paypal-button" width="128" height="49" type="image" src="{{asset('assets/img/paypal-donate.png')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
-            </div>
             <div class="col-12">
                 @if(Session::has('created_rev'))
                 <div class="alert alert-success alert-dismissible fade show text-center mt-3" role="alert">
@@ -288,24 +280,34 @@
         <div class="container">
         <div class="row">
             <div class="col-4">
-                <span style="font-weight:600;">
-                    Contribute on <a href="https://github.com/22fevrier2019/22fevrier2019" target="_blank" >GITHUB: <img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a> 
-                </span>
-            </div>
-            <div class="col-4">
-            {!!Share::page('https://22fevrier2019.org', null, [], '<ul class="social-share-icons"><span class="share-text">Share on: </span>', '</ul>')
+            {!!Share::page('https://22fevrier2019.org', null, [], '<ul class="social-share-icons"><span class="share-text footer-to-hide">Share: </span>', '</ul>')
                 ->facebook()
                 ->twitter()
                 !!}
             </div>
             <div class="col-4">
-                <p class="email-class" style="font-weight:600; margin-bottom: 0px;">Email: <a href="mailto:contact@22fevrier2019.org" class="email-email">contact</a></p>
+            <span style="font-weight:600;">
+                    <span>Contribute: </span><a href="https://github.com/22fevrier2019/22fevrier2019" target="_blank" ><img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a> 
+                </span>
+            </div>
+            <div class="col-4">
+                <p class="email-class" style="font-weight:600; margin-bottom: 0px;"><span>Email: </span><a href="mailto:contact@22fevrier2019.org" class="email-email"><img width="25" src="{{asset('assets/img/mail.svg')}}"></a></p>
             </div>
         </div>
         </div>
-        <div> 
-            <p class="footer-text">© Copyright 2019 – 22fevrier2019</p>
-        </div>
+            <table class="mx-auto donate-container">
+                <tr>
+                    <td><p class="footer-text" style="display:inline;">Support us by donating: &nbsp</p></td>
+                    <td>
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;">
+                            <input type="hidden" name="cmd" value="_s-xclick">
+                            <input type="hidden" name="hosted_button_id" value="XGYSKR4FZB5HN">
+                            <input id="paypal-button" class="paypal-button" class="hex-icon-heart" width="40" type="image" src="{{asset('assets/img/heart-1.svg')}}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                        </form>
+                    </td>
+                </tr>
+            </table>
     </footer>
 
 
@@ -322,6 +324,10 @@
 
     <script>
         $(document).ready(function() {
+
+        /*window.onresize = function(){
+            console.log(window.innerWidth);
+        }*/
         var form = $("#revendication-add-form");
         $('#revendication-add').on("click", function () {
             form.submit();
@@ -335,7 +341,26 @@
             $('#words-left').text(textlen);
         });
 
-
+        /* Donate Animation */
+        var state = 0;
+        var paypalButton = $('#paypal-button');
+        setInterval(() => {
+            switch(state){
+                case 0 :
+                    paypalButton.attr('src','/assets/img/heart-1.svg');
+                    state = 1;
+                    break;
+                case 1:
+                    paypalButton.attr('src','/assets/img/heart-2.svg');
+                    state = 2;
+                    break;
+                case 2:
+                    paypalButton.attr('src','/assets/img/heart-3.svg');
+                    state = 0;
+                    break;
+                default: break;
+            }       
+        }, 500);
 
         //prevent double submits
         form.on('submit',function(){
