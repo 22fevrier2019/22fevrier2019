@@ -237,6 +237,10 @@ button.back-to-top.show:active {
   outline-width: 0;
 }
 
+#privacy-button:hover{
+  cursor: pointer;
+}
+
 @keyframes donation-animation{
   from {width: 40px;}
   to {width: 35px;}
@@ -256,13 +260,14 @@ button.back-to-top.show:active {
   }
   
 
-  .email-class{
+  .email-class, .conditions{
     font-size: 12px !important;
   }
 
   .donate-container .footer-text{
     font-size: 13px;
     position: relative;
+    top: 0;
   }
 
   .donate-container #paypal-button{
@@ -291,7 +296,7 @@ button.back-to-top.show:active {
     font-size: 13px !important;
   }
 
-  .email-class{
+  .email-class, .conditions{
     font-size: 13px !important;
   }
 
@@ -312,6 +317,12 @@ button.back-to-top.show:active {
   }
 }
 
+@media screen and (max-width: 475px){
+  .donate-container{
+    position: relative;
+    top: -12px;
+  }
+}
 
 @media screen and (max-width: 450px){
   #main-btn-navbar{

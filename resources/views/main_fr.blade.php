@@ -39,6 +39,13 @@
     <meta name="twitter:description" content="A website for free Algerians.">
     <meta name="twitter:image" content="{{asset('assets/img/share.png')}}">
     <meta name="twitter:domain" content="22fevrier2019.org">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WJS5QHP');</script>
+    <!-- End Google Tag Manager -->
     <!-- Hotjar Tracking Code for https://22fevrier2019.org/ -->
     <script>
         (function(h,o,t,j,a,r){
@@ -64,6 +71,11 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJS5QHP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <nav class="navbar navbar-expand-lg navbar-dark" id="main-navbar">
         <div class="container">
             @auth
@@ -240,7 +252,7 @@
     </div>
 
     <div class="modal fade" id="modal-about-us" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-    <div class="modal-dialog modal- modal-dialog-centered modal-sm modal-xs modal-lg" role="document">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm modal-xs modal-lg" role="document">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -270,25 +282,78 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-privacy" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm modal-xs modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-default">Terms of service</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    Toute personne utilisant le site 22fevrier2019.org s’engage à respecter les conditions d’utilisation ci-dessous : <br><br>
+                    <strong>Définitions:</strong><br><br>
+                    <div style="padding-left:40px;">
+                        <strong>Plateform </strong> désigne le site web <a href="https://22fevrier2019.org">www.22fevrier2019.org</a><br>
+                        <strong>Site </strong> désigne le site web <a href="https://22fevrier2019.org">www.22fevrier2019.org</a><br>
+                        <strong>Émetteur/Utilisateur </strong> désigne la personne qui publie un contenu multimédia (texte, image, vidéo) sur le site web <a href="https://22fevrier2019.org">www.22fevrier2019.org</a><br>
+                        <strong>Webmasters</strong> désigne le collectif fondateur du site web <a href="https://22fevrier2019.org">www.22fevrier2019.org</a><br>
+                    </div>
+                    <br>
+                    <ul>
+                        <li>Toute proposition de revendication publiée sur le site est la propriété de son émetteur (personne l'ayant publié).</li>
+                        <li>L’utilisateur qui publie une revendication sur le site s’engage à respecter les lois de la république algérienne.</li>
+                        <li>Il est interdit de diffamer, insulter ou porter atteinte directement ou indirectement à des personnes. Dans le cas échéant, la proposition de revendication sera supprimée par les webmasters du site.</li>
+                        <li>Les propositions de revendication doivent être rédigées dans un langage respectueu. Toute insulte ou “phrase irrespectueuse” entraînera la suppression de la proposition de revendication.</li>
+                        <li>Les propositions de revendication sont classées selon le nombre de votes positifs des utilisateurs de la plateforme. Les webmasters du site n’interviennent pas dans le classement des revendications.</li>
+                        <li>Après la publication d’une proposition de revendication, aucune modification ne peut lui être apportée, ni par son émetteur, ni par les webmasters de la plateforme.</li>
+                        <li>La plateforme s’engage à ne pas utiliser les informations recueillies sur les utilisateurs à un autre usage que de les prévenir d’éventuelles nouveautés sur la plateforme.</li>
+                        <li>Les données utilisateurs recueillies sont sécurisées et cryptées, afin de garantir l’anonymat et la sécurité de nos utilisateurs.</li>
+                    </ul>
+                    <br>
+                    <strong>À propos de la plateforme </strong>
+                    <br>
+                    <br>
+                    <ul>
+                        <li>La plateforme est un outil destiné à rassembler et organiser les revendications politiques. Elle s’abstient de donner son avis sur quelque question que se soit.</li>
+                        <li>La plateforme et apartisane, elle n’est engagée dans aucun courant ou parti politique.</li>
+                        <li>Le collectif fondateur de la plateforme 22fevrier2019 souhaite rester anonyme pour le moment, dans le but de mettre en avant les propositions et non pas les personnes.</li>
+                    </ul>                
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success mx-auto" data-dismiss="modal">Confirmer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Back to top -->
     <button class="back-to-top" type="button"></button>
 
     <footer>
         <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
             {!!Share::page('https://22fevrier2019.org', null, [], '<ul class="social-share-icons"><span class="share-text footer-to-hide">Share: </span>', '</ul>')
                 ->facebook()
                 ->twitter()
                 !!}
             </div>
-            <div class="col-4">
+            <div class="col-3">
             <span style="font-weight:600;">
                     <span>Contribute: </span><a href="https://github.com/22fevrier2019/22fevrier2019" target="_blank" ><img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a> 
                 </span>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <p class="email-class" style="font-weight:600; margin-bottom: 0px;"><span>Email: </span><a href="mailto:contact@22fevrier2019.org" class="email-email"><img width="25" src="{{asset('assets/img/mail.svg')}}"></a></p>
+            </div>
+            <div class="col-3">
+                <p class="conditions" style="font-weight:600;">Privacy: <img id="privacy-button" width="25" src="{{asset('assets/img/privacy.svg')}}"></p>
             </div>
         </div>
         </div>
@@ -319,9 +384,14 @@
 
     <script>
     $(document).ready(function() {
-        window.onresize = function(){
+        /*window.onresize = function(){
             console.log(window.innerWidth);
-        }
+        }*/
+
+        /* Terms of use */
+        $('#privacy-button').on('click', function(){
+            $('#modal-privacy').modal('show');
+        });
         
         var form = $("#revendication-add-form");
         $('#revendication-add').on("click", function () {
