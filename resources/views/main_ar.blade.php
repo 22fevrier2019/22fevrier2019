@@ -39,13 +39,6 @@
     <meta name="twitter:description" content="A website for free Algerians.">
     <meta name="twitter:image" content="{{asset('assets/img/share.png')}}">
     <meta name="twitter:domain" content="22fevrier2019.org">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WJS5QHP');</script>
-    <!-- End Google Tag Manager -->
     <!-- Hotjar Tracking Code for https://22fevrier2019.org/ -->
     <script>
         (function(h,o,t,j,a,r){
@@ -69,10 +62,6 @@
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJS5QHP"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     
     <nav class="navbar navbar-expand-lg navbar-dark" id="main-navbar">
         <div class="container">
@@ -111,34 +100,22 @@
             </div>
         </div>
     </div>
+
     <div class="container misc">
-        <div class="row">
-            <div class="col-10 col-sm-12 mx-auto my-3 text-right">
-
-                <button class="btn btn-icon btn-3" type="button" id="about-us" data-toggle="modal" data-target="#modal-about-us">
-                    <span class="btn-inner--text">عن الموقع</span>
-                    <span class="btn-inner--icon"><i class="fa fa-question-circle fa-spin"></i></span>
-                </button>
-
-                <div class="dropdown">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        التصنيف
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        <a class="dropdown-item" href="/">الاعجاب</a>
-                        <a class="dropdown-item" href="/ar/newest">الحداثة</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        اللغة
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/">عربية</a>
-                        <a class="dropdown-item" href="/fr">فرنسية</a>
-                    </div>
-                </div>
+        <div class="row my-3">
+            <div class="col-12">
+                <ul class="nav nav-pills nav-pills-circle">
+                    <li class="nav-item">
+                        <a class="nav-link rounded-circle active top-button" id="filter-button">
+                            <span class="nav-link-icon d-block"><i class="fa fa-filter" aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+                    <li class="nav-item mr-auto">
+                        <a class="nav-link rounded-circle active top-button" id="about-us" data-toggle="modal" data-target="#modal-about-us">
+                            <span class="nav-link-icon d-block"><i class="fa fa-question-circle"></i></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -172,6 +149,7 @@
                                                 <i id="{{'dislike-icon-' . $i}}" class="{{\App\Dislike::where('user_id',Auth::id())->where('revendication_id',$revendication->id)->first() != null ? 'fa fa-thumbs-down purple-dislike dislike-reaction' : 'fa fa-thumbs-down dislike-reaction'}}" aria-hidden="true"></i>
                                             </span>
                                             <span class="chair-react-total" id="{{'chair-react-total-' . $i}}">{{$revendication->dislikes->count()}}</span>
+                                            <span class="badge badge-pill badge-warning category-badge"><a href="{{'/filter?language=ar&order=popular&category=' . $revendication->category->id}}" style="color:#ff3709;">{{$revendication->category->arabe}}</a></span>
                                         </span>
                                     </div>
                                 </div>
@@ -206,6 +184,17 @@
                         {{csrf_field()}}
                         <textarea id="text-area" class="form-control form-control-alternative" rows="5" dir="rtl"
                             placeholder="... أكتب نصك هنا" name="content" maxlength="280"></textarea>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <select class="my-3" name="category" id="category-select">
+                                        <?php $i=0; ?>
+                                        @foreach($categories as $category)
+                                        <?php $i++ ?>
+                                            <option value="{{$category->id}}">{{$category->arabe}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                     </form>
                     <div class="words-left-container mt-3 text-center">
                         <span class="badge" style="background-color: #fff; font-size:14px;"><span style="color: #525f7f;">لديك <span id="words-left" style="color: #dd3333; font-size: 16px;">280</span> حرف متبقي</span></span>
@@ -335,6 +324,96 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-lg modal-filter" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header text-center">
+                    <h6 class="modal-title" id="modal-title-default">التصنيف</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/filter" id="filter-form">
+                        <div class="row p-3 pr-5">
+                            <div class="col-12">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-sm-2">
+                                        <label style="font-weight:600;">Langage: </label>
+                                    </div>
+                                    <div class="col-12 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-3">
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input name="language" class="custom-control-input" id="customRadio1" checked="" type="radio" value="ar">
+                                                    <label class="custom-control-label" for="customRadio1">Arabe</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-3">
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input name="language" class="custom-control-input" id="customRadio2" type="radio" value="fr">
+                                                    <label class="custom-control-label" for="customRadio2">Français</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12 col-sm-2">
+                                        <label style="font-weight:600;">Ordre: </label>
+                                    </div>
+                                    <div class="col-12 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-3">
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input name="order" class="custom-control-input" id="customRadio3" checked="" type="radio" value="popular">
+                                                    <label class="custom-control-label" for="customRadio3">Popularité</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-3">
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input name="order" class="custom-control-input" id="customRadio4" type="radio" value="newest">
+                                                    <label class="custom-control-label" for="customRadio4">Nouveauté</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-2">
+                                    <label style="font-weight:600;">Catégory: </label>
+                                    </div>
+                                    <div class="col-12 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-4 col-6">
+                                                <div class="mb-3">
+                                                    <select name="category" id="category-select">
+                                                        <option value="0">جميعها</option>
+                                                        <?php $i=0; ?>
+                                                        @foreach($categories as $category)
+                                                        <?php $i++ ?>
+                                                            <option value="{{$category->id}}">{{$category->arabe}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success mx-auto" id="filter-form-submit">تأكيد</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Back to top -->
     <button class="back-to-top" type="button"></button>
 
@@ -388,8 +467,7 @@
     <script src="{{ asset('js/share.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-
+    $(document).ready(function() {
         /*window.onresize = function(){
             console.log(window.innerWidth);
         }*/
@@ -400,11 +478,29 @@
         });
 
 
+        $('#filter-button').on('click', function(){
+            $('#modal-filter').modal('show');
+        });
+        
         var form = $("#revendication-add-form");
         $('#revendication-add').on("click", function () {
             form.submit();
         });
 
+        var filter_form = $("#filter-form");
+        $('#filter-form-submit').on("click", function () {
+            filter_form.submit();
+        });
+
+        form.on('submit',function(){
+        console.log('submiting');
+            $('#revendication-add').attr('disabled','true');
+        });
+
+        filter_form.on('submit',function(){
+        console.log('submiting');
+            $('#filter-form-submit').attr('disabled','true');
+        });
 
         /*Words left */
         var maxLength = 280;
@@ -434,16 +530,11 @@
             }       
         }, 500);
 
-        //prevent double submits
-        form.on('submit',function(){
-            console.log('submiting');
-            $('#revendication-add').attr('disabled','true');
-        });
 
 
         /* Ajax Requests */
-/*        $('.like-reaction').on('click',function(event){
-            var revendication_index = event.target.id.replace( /^\D+/g, '');
+    /*    $('.like-reaction').on('click',function(event){
+            var revendication_index = event.target.id[event.target.id.length - 1];
             console.log(revendication_index);
         });*/
 
@@ -451,7 +542,7 @@
         var auth = $('#auth_true');
         $('.like-reaction').on('click',function(event){
             if(auth.val() == 'true'){
-            var revendication_index = event.target.id.replace( /^\D+/g, '');
+                var revendication_index = event.target.id.replace( /^\D+/g, '');
             if($('#dislike-icon-' + revendication_index).hasClass('purple-dislike')){
                 var real_target = $('#dislike-icon-' + revendication_index);
                 like(revendication_index,event.target);
@@ -611,6 +702,7 @@
         });
 
     });
+
 
     </script>
 </body>

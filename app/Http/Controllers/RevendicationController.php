@@ -16,21 +16,11 @@ class RevendicationController extends Controller
     public function create(Request $request){
         Revendication::create([
             'content' => $request->content,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'category_id' => $request->category
         ]);
         Session::flash('created_rev','true');
-        return redirect('/ar/newest')->with('revendications',Revendication::orderBy('created_at','desc')->get());
-    }
-
-
-    public function createFr(Request $request){
-        Revendication::create([
-            'content' => $request->content,
-            'user_id' => Auth::id()
-        ]);
-        $revendications = Revendication::withCount('likes')->orderBy('likes_count', 'desc')->get();
-        Session::flash('created_rev','true');
-        return redirect('/fr/newest')->with('revendications',Revendication::orderBy('created_at','desc')->get());
+        return redirect()->back();
     }
 
 

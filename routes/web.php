@@ -15,20 +15,16 @@ Route::get('/',[
     'uses' => 'MainController@index'
 ]);
 
+Route::get('/filter',[
+    'uses' => 'MainController@filter'
+]);
+
 Route::get('/ar',[
     'uses' => 'MainController@index'
 ]);
 
-Route::get('/ar/newest',[
-    'uses' => 'MainController@indexNewest'
-]);
-
 Route::get('/fr',[
     'uses' => 'MainController@indexFr'
-]);
-
-Route::get('/fr/newest',[
-    'uses' => 'MainController@indexFrNewest'
 ]);
 
 Route::get('/auth/{provider}',[
@@ -54,7 +50,6 @@ Route::post('/revendication/create/fr',[
 Route::post('/revendication/like',[
     'uses' => 'RevendicationController@like'
 ]);
-
 
 
 Route::post('/revendication/dislike',[

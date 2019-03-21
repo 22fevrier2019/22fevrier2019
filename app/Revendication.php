@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Revendication extends Model
 {
     protected $fillable = [
-        'content','user_id'
+        'content','user_id','category_id','lang'
     ];
 
 
@@ -24,6 +24,10 @@ class Revendication extends Model
     public function dislikes()
     {
         return $this->hasMany(Dislike::class,'revendication_id');
+    }
+
+    public function category(){
+        return $this->belongsTo('App\Category','category_id');
     }
 
 

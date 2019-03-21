@@ -4794,7 +4794,7 @@ input[type='button'].btn-block
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before
 {
-    background-color: #5e72e4;
+    background-color: #2dce89;
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::after
@@ -7226,6 +7226,10 @@ button.close
     {
         max-width: 300px;
     }
+
+    .modal-filter{
+        max-width: 400px;
+    }
     #about-text{
         font-size: 14px;
     }
@@ -7257,6 +7261,10 @@ button.close
     .modal-sm
     {
         max-width: 500px;
+    }
+
+    .modal-filter{
+        max-width: 700px;
     }
     #about-text{
         font-size: 1rem;
@@ -15024,7 +15032,7 @@ a.btn-icon-only
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before
 {
-    border-color: #5e72e4;
+    border-color: #2dce89;
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::after

@@ -246,6 +246,37 @@ button.back-to-top.show:active {
   to {width: 35px;}
 }
 
+#category-select{
+  color: #525f7f;
+  padding: 5px;
+  border-radius: 5px;
+  border-color: #525f7f;
+}
+
+#category-select option:focus{
+  background: black !important;
+}
+
+.top-button{
+  transition: all 0.3 ease;
+  background-color: #2dce89 !important;
+  position: relative;
+}
+
+.top-button:hover{
+  cursor: pointer;
+  color: white !important;
+  top: -1px;
+}
+
+.top-button i{
+  font-size: 20px !important;
+}
+
+.category-badge:hover{
+  cursor: pointer;
+}
+
 
 @media screen and (max-width: 576px){
 
