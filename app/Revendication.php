@@ -30,5 +30,24 @@ class Revendication extends Model
         return $this->belongsTo('App\Category','category_id');
     }
 
+    public function scopeByOrder($query, $order)
+    {
+        if ($order === 'newest'){
+            return $query->orderBy('created_at','desc');
+        }
+
+        if ($order === 'popular'){
+             $query->withCount('likes')->orderBy('likes_count', 'desc');
+        }
+
+    }
+
+    public function scopeByCategory($query, $category)
+    {
+        if ($category == 0) {
+            return $query;
+        }
+        return $query->where('category_id', $category);
+    }
 
 }
