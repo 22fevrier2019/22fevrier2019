@@ -27,7 +27,7 @@ class SetLocalisation
         }
 
         if(!request('lang')) {
-            app()->setLocale(session('lang'));
+            app()->setLocale('fr');
         }
         return $next($request);
     }
