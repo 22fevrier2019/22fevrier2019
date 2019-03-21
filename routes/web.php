@@ -10,51 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+if (!auth()->check()) {
+    \Auth::loginUsingId(1);
+}
+// \Auth::logout();
 
-Route::get('/',[
-    'uses' => 'MainController@index'
-]);
+Route::get('/', 'MainController@index');
 
-Route::get('/filter',[
-    'uses' => 'MainController@filter'
-]);
+Route::get('/filter', 'MainController@filter');
 
-Route::get('/ar',[
-    'uses' => 'MainController@index'
-]);
+Route::get('/auth/{provider}', 'AuthenticationController@redirectToProvider');
 
-Route::get('/fr',[
-    'uses' => 'MainController@indexFr'
-]);
+Route::get('/auth/{provider}/callback', 'AuthenticationController@AuthenticateUser');
 
-Route::get('/auth/{provider}',[
-    'uses' => 'AuthenticationController@redirectToProvider',
-]);
+Route::post('/revendication/create', 'RevendicationController@create')->name('revendication.create');
 
-Route::get('/auth/{provider}/callback',[
-    'uses' => 'AuthenticationController@AuthenticateUser',
-]);
+Route::post('/revendication/like', 'RevendicationController@like');
 
-
-Route::post('/revendication/create',[
-    'uses' => 'RevendicationController@create',
-    'as' => 'revendication.create'
-]);
-
-Route::post('/revendication/create/fr',[
-    'uses' => 'RevendicationController@createFr',
-    'as' => 'revendication.create.fr'
-]);
-
-
-Route::post('/revendication/like',[
-    'uses' => 'RevendicationController@like'
-]);
-
-
-Route::post('/revendication/dislike',[
-    'uses' => 'RevendicationController@dislike'
-]);
+Route::post('/revendication/dislike', 'RevendicationController@dislike');
 
 Route::group(['prefix' => 'admin-panel'], function () {
     Voyager::routes();

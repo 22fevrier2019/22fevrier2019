@@ -28,7 +28,7 @@
 
     <!-- Facebook OpenGraph -->
     <meta property="og:url" content="https://22fevrier2019.org/" />
-    <meta property="fb:app_id" content="546361825856562" />
+     <meta property="fb:app_id" content="546361825856562" />
   	<meta property="og:type" content="website" />
     <meta property="og:title" content="22 Fevrier 2019" />
     <meta property="og:description" content="A website for free Algerians" />
@@ -52,6 +52,8 @@
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136151161-1"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136151161-1"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -62,27 +64,37 @@
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-dark" id="main-navbar">
         <div class="container">
-            @auth
-            <input type="hidden" value="true" id="auth_true">
-            <button type="button" class="btn btn-success" id="main-btn-navbar" data-toggle="modal"
-                data-target="#revendicationModal">أقترح مطلبي</button>
-            @else
-            <button type="button" class="btn btn-success" id="main-btn-navbar" data-toggle="modal"
-                data-target="#loginModal">تسجيل الدخول</button>
-            @endauth
+            <div>
+                @auth
+                <input type="hidden" value="true" id="auth_true">
+                <button type="button" class="btn btn-success" id="main-btn-navbar" data-toggle="modal"
+                    data-target="#revendicationModal">@lang('main.revendication.buttonText')</button>
+                @else
+                <button type="button" class="btn btn-success" id="main-btn-navbar" data-toggle="modal"
+                    data-target="#loginModal">@lang('main.revendication.modalLoginText')</button>
+                @endauth
+            </div>
+
+            <div>
+                @if(app()->getLocale() == 'fr')
+                  <a href="{{ request()->fullUrlWithQuery(['lang' => 'ar']) }}">Arabic</a>
+                @else
+                  <a href="{{ request()->fullUrlWithQuery(['lang' => 'fr']) }}">فرنسية</a>
+                @endif
+            </div>
+
         </div>
     </nav>
-    
 
     <div class="container">
         <div class="row" style="padding-left: 0px; padding-right: 0px;">
             <div class="col-12">
                 @if(Session::has('created_rev'))
                 <div class="alert alert-success alert-dismissible fade show text-center mt-3" role="alert">
-                    <span class="alert-inner--text" style="font-size:14px;">تمت إضافة مطلبك بنجاح</span>
+                    <span class="alert-inner--text" style="font-size:14px;">@lang('main.revendication.success')</span>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -90,7 +102,9 @@
                 </div>
                 @else
                 <div class="alert alert-dismissible fade show text-center mt-3" role="alert" style="background-color: #F44336;">
-                    <span class="alert-inner--text" style="font-size:14px;"><strong>تنويه :&nbsp</strong> سنقوم بعدة تحديثات التي من شأنها تحسين الموقع في الأيام القادمة ترقبونا</span>
+                    <span class="alert-inner--text" style="font-size:14px;">
+                        <strong>@lang('main.warning')</strong> @lang('main.warning.message')
+                    </span>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -149,14 +163,14 @@
                                                 <i id="{{'dislike-icon-' . $i}}" class="{{\App\Dislike::where('user_id',Auth::id())->where('revendication_id',$revendication->id)->first() != null ? 'fa fa-thumbs-down purple-dislike dislike-reaction' : 'fa fa-thumbs-down dislike-reaction'}}" aria-hidden="true"></i>
                                             </span>
                                             <span class="chair-react-total" id="{{'chair-react-total-' . $i}}">{{$revendication->dislikes->count()}}</span>
-                                            <span class="badge badge-pill badge-warning category-badge"><a href="{{'/filter?language=ar&order=popular&category=' . $revendication->category->id}}" style="color:#ff3709;">{{$revendication->category->arabe}}</a></span>
+                                            <span class="badge badge-pill badge-warning category-badge"><a href="{{'/filter?language=fr&order=popular&category=' . $revendication->category->id}}" style="color:#ff3709;">{{$revendication->category->french}}</a></span>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-12 col-rev-share">
-                                    {!!Share::page('https://22fevrier2019.org', $revendication->content . " \n#22fevrier2019", [], '<ul class="social-share-icons share-rev-buttons" style="margin-bottom:0; margin-left: 0; padding-left:0;">', '</ul>')
+                                {!!Share::page('https://22fevrier2019.org', $revendication->content . " \n#22fevrier2019", [], '<ul class="social-share-icons share-rev-buttons" style="margin-bottom:0; margin-left: 0; padding-left:0;">', '</ul>')
                                     ->twitter()
-                                    !!}
+                                !!}
                                 </div>
                             </div>
                         </div>
@@ -174,7 +188,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" id="revendication-modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title ml-auto" id="revendication-modal-title">اقترح مطلبك</h6>
+                    <h6 class="modal-title" id="revendication-modal-title">@lang('main.revendication.title')</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -182,30 +196,33 @@
                 <div class="modal-body">
                     <form action="{{route('revendication.create')}}" method="post" id="revendication-add-form">
                         {{csrf_field()}}
-                        <textarea id="text-area" class="form-control form-control-alternative" rows="5" dir="rtl"
-                            placeholder="... أكتب نصك هنا" name="content" maxlength="280"></textarea>
-                            <div class="row">
-                                <div class="col-12 text-right">
-                                    <select class="my-3" name="category" id="category-select">
-                                        <?php $i=0; ?>
-                                        @foreach($categories as $category)
-                                        <?php $i++ ?>
-                                            <option value="{{$category->id}}">{{$category->arabe}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <textarea id="text-area" class="form-control form-control-alternative" rows="5"
+                            placeholder="{{ __('main.revendication.inputPlaceholder') }}" name="content" maxlength="280"></textarea>
+                        <div class="row">
+                            <div class="col-12">
+                                <select class="my-3" name="category" id="category-select">
+                                    <?php $i=0; ?>
+                                    @foreach($categories as $category)
+                                    <?php $i++ ?>
+                                        <option value="{{ $category->id }}">{{ $local == 'fr' ? $category->french : $category->arabe }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
                     </form>
                     <div class="words-left-container mt-3 text-center">
-                        <span class="badge" style="background-color: #fff; font-size:14px;"><span style="color: #525f7f;">لديك <span id="words-left" style="color: #dd3333; font-size: 16px;">280</span> حرف متبقي</span></span>
+                        <span class="badge" style="background-color: #fff; font-size:14px;">
+                            <span style="color: #525f7f;">
+                                @lang('main.revendication.wordsLeftPre')
+                                <span id="words-left" style="color: #dd3333; font-size: 16px;">280</span>
+                                @lang('main.revendication.wordsLeftSuf')
+                            </span>
+                        </span>
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <div class="mr-auto">
-                        <button type="button" class="btn btn-secondary" id="revendication-add">تأكيد</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('main.revendication.buttonCancel')</button>
+                    <button type="button" class="btn btn-secondary" id="revendication-add">@lang('main.revendication.buttonSubmit')</button>
                 </div>
             </div>
         </div>
@@ -219,10 +236,10 @@
                     <div class="card bg-secondary shadow border-0">
                         <div class="card-header bg-white pb-5">
                             <div class="text-muted text-center mb-3">
-                                <small>التسجيل عن طريق</small>
+                                <small>@lang('main.loginText')</small>
                             </div>
                             <div class="btn-wrapper text-center">
-                               <a href="{{ url('/auth/facebook') }}" class="btn btn-neutral btn-icon">
+                                <a href="{{ url('/auth/facebook') }}" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon">
                                         <img src="{{asset('assets/img/icons/common/facebook.svg')}}">
                                     </span>
@@ -246,33 +263,24 @@
         <div class="modal-dialog modal- modal-dialog-centered modal-sm modal-xs modal-lg" role="document">
             <div class="modal-content">
 
-                <div class="modal-header ml-auto">
-                    <h6 class="modal-title" id="modal-title-default">حول الموقع</h6>
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-default">@lang('main.about.title')</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <p id="about-text" dir="rtl">Alger, 13 mars 2019 - Lancé aujourd’hui, <a href="/fr">“www.22fevrier2019.org”</a>  est un site internet réalisé par des jeunes algériens. Il a pour but de centraliser les revendications citoyennes et de faire émerger une plateforme légitime et représentative du mouvement de changement que vit l’Algérie. <br>
-
-                        La révolution algérienne en cours, incarne la beauté de l’Algérie. Une Algérie moderne et citoyenne, une Algérie inclusive et unie, une Algérie jeune et libre. “Comment peut on transformer ce mouvement du peuple en un véritable changement sur le terrain”, c’est à cette question récurrente qu’un groupe de jeunes tente de répondre à travers le développement de ce site web. <br>
-
-                        L’objectif de <a href="/fr">“www.22fevrier2019.org”</a> est de constituer une plateforme de revendication à laquelle pourra participer chaque Algérien. Chaque citoyen peut proposer une revendication, il peut aussi donner un vote positif ou négatif pour les revendications proposées par ces concitoyens. <br>
-
-                        La peur de récupération politique de ce mouvement, rend les algériens méfiants à l’égard des politiques de tous bords, c’est pourquoi la nécessité d’une telle plateforme c’est imposé à nous. <br>
-
-                        Le rôle que joue internet et les réseaux sociaux dans l’expression des revendications du peuple est indéniable. Ce site est un moyen de plus pour les algériens de s’organiser afin de faire aboutir le mouvement.</p>
+                    <p id="about-text">@lang('main.about.content')</p>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success mx-auto" data-dismiss="modal">تأكيد</button>
+                    <button type="button" class="btn btn-success mx-auto" data-dismiss="modal">@lang('main.about.button')</button>
                 </div>
 
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="modal-privacy" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-sm modal-xs modal-lg" role="document">
@@ -313,11 +321,11 @@
                         <li>La plateforme est un outil destiné à rassembler et organiser les revendications politiques. Elle s’abstient de donner son avis sur quelque question que se soit.</li>
                         <li>La plateforme et apartisane, elle n’est engagée dans aucun courant ou parti politique.</li>
                         <li>Le collectif fondateur de la plateforme 22fevrier2019 souhaite rester anonyme pour le moment, dans le but de mettre en avant les propositions et non pas les personnes.</li>
-                    </ul>                
+                    </ul>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success mx-auto" data-dismiss="modal">تأكيد</button>
+                    <button type="button" class="btn btn-success mx-auto" data-dismiss="modal">Confirmer</button>
                 </div>
 
             </div>
@@ -329,52 +337,32 @@
             <div class="modal-content">
 
                 <div class="modal-header text-center">
-                    <h6 class="modal-title" id="modal-title-default">التصنيف</h6>
+                    <h6 class="modal-title" id="modal-title-default">@lang('main.filters.title')</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <form action="/filter" id="filter-form">
                         <div class="row p-3 pr-5">
                             <div class="col-12">
                                 <div class="row mb-3">
                                     <div class="col-12 col-sm-2">
-                                        <label style="font-weight:600;">Langage: </label>
-                                    </div>
-                                    <div class="col-12 col-sm-10">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-3">
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input name="language" class="custom-control-input" id="customRadio1" checked="" type="radio" value="ar">
-                                                    <label class="custom-control-label" for="customRadio1">Arabe</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-3">
-                                                <div class="custom-control custom-radio mb-3">
-                                                    <input name="language" class="custom-control-input" id="customRadio2" type="radio" value="fr">
-                                                    <label class="custom-control-label" for="customRadio2">Français</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12 col-sm-2">
-                                        <label style="font-weight:600;">Ordre: </label>
+                                        <label style="font-weight:600;">@lang('main.filters.order.label') </label>
                                     </div>
                                     <div class="col-12 col-sm-10">
                                         <div class="row">
                                             <div class="col-12 col-sm-3">
                                                 <div class="custom-control custom-radio mb-3">
                                                     <input name="order" class="custom-control-input" id="customRadio3" checked="" type="radio" value="popular">
-                                                    <label class="custom-control-label" for="customRadio3">Popularité</label>
+                                                    <label class="custom-control-label" for="customRadio3">@lang('main.filters.order.option1')</label>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-3">
                                                 <div class="custom-control custom-radio mb-3">
                                                     <input name="order" class="custom-control-input" id="customRadio4" type="radio" value="newest">
-                                                    <label class="custom-control-label" for="customRadio4">Nouveauté</label>
+                                                    <label class="custom-control-label" for="customRadio4">@lang('main.filters.order.option2')</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -382,18 +370,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-sm-2">
-                                    <label style="font-weight:600;">Catégory: </label>
+                                    <label style="font-weight:600;">@lang('main.filters.category.label') </label>
                                     </div>
                                     <div class="col-12 col-sm-10">
                                         <div class="row">
                                             <div class="col-md-3 col-sm-4 col-6">
                                                 <div class="mb-3">
                                                     <select name="category" id="category-select">
-                                                        <option value="0">جميعها</option>
+                                                        <option value="0">@lang('main.filters.category.default')</option>
                                                         <?php $i=0; ?>
                                                         @foreach($categories as $category)
                                                         <?php $i++ ?>
-                                                            <option value="{{$category->id}}">{{$category->arabe}}</option>
+                                                            <option value="{{$category->id}}">{{$category->french}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -407,7 +395,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success mx-auto" id="filter-form-submit">تأكيد</button>
+                    <button type="button" class="btn btn-success mx-auto" id="filter-form-submit">@lang('main.filters.button')</button>
                 </div>
 
             </div>
@@ -428,7 +416,7 @@
             </div>
             <div class="col-3">
             <span style="font-weight:600;">
-                    <span>Contribute: </span><a href="https://github.com/22fevrier2019/22fevrier2019" target="_blank" ><img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a> 
+                    <span>Contribute: </span><a href="https://github.com/22fevrier2019/22fevrier2019" target="_blank" ><img width="25" height="25" src="{{asset('/assets/img/icons/common/github.svg')}}"></a>
                 </span>
             </div>
             <div class="col-3">
@@ -453,8 +441,6 @@
                 </tr>
             </table>
     </footer>
-
-
 
     <!-- Core -->
     <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
@@ -481,7 +467,7 @@
         $('#filter-button').on('click', function(){
             $('#modal-filter').modal('show');
         });
-        
+
         var form = $("#revendication-add-form");
         $('#revendication-add').on("click", function () {
             form.submit();
@@ -527,7 +513,7 @@
                     state = 0;
                     break;
                 default: break;
-            }       
+            }
         }, 500);
 
 
@@ -552,7 +538,7 @@
              }
             }else{
                 $('#loginModal').modal('show');
-            } 
+            }
         });
 
 
