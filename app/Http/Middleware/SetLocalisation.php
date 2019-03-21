@@ -27,7 +27,12 @@ class SetLocalisation
         }
 
         if(!request('lang')) {
-            app()->setLocale('fr');
+            if(session()->has('lang')){
+                app()->setLocale(session('lang'));
+            }else{
+                app()->setLocale('ar');
+                session()->put('lang', 'ar');
+            }
         }
         return $next($request);
     }

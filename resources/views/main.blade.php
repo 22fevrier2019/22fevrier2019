@@ -67,7 +67,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark" id="main-navbar">
         <div class="container">
-            <div>
+            <div class="text-center mx-auto">
                 @auth
                 <input type="hidden" value="true" id="auth_true">
                 <button type="button" class="btn btn-success" id="main-btn-navbar" data-toggle="modal"
@@ -77,15 +77,6 @@
                     data-target="#loginModal">@lang('main.revendication.modalLoginText')</button>
                 @endauth
             </div>
-
-            <div>
-                @if(app()->getLocale() == 'fr')
-                  <a href="{{ request()->fullUrlWithQuery(['lang' => 'ar']) }}">Arabic</a>
-                @else
-                  <a href="{{ request()->fullUrlWithQuery(['lang' => 'fr']) }}">فرنسية</a>
-                @endif
-            </div>
-
         </div>
     </nav>
 
@@ -117,19 +108,26 @@
 
     <div class="container misc">
         <div class="row my-3">
-            <div class="col-12">
+            <div class="col-8">
                 <ul class="nav nav-pills nav-pills-circle">
                     <li class="nav-item">
                         <a class="nav-link rounded-circle active top-button" id="filter-button">
                             <span class="nav-link-icon d-block"><i class="fa fa-filter" aria-hidden="true"></i></span>
                         </a>
                     </li>
-                    <li class="nav-item mr-auto">
+                    <li class="nav-item">
                         <a class="nav-link rounded-circle active top-button" id="about-us" data-toggle="modal" data-target="#modal-about-us">
                             <span class="nav-link-icon d-block"><i class="fa fa-question-circle"></i></span>
                         </a>
                     </li>
                 </ul>
+            </div>
+            <div class="col-4 text-right mt-3">
+                @if(app()->getLocale() == 'fr')
+                    <a class="btn btn-success" href="{{ request()->fullUrlWithQuery(['lang' => 'ar']) }}">Arabe</a>
+                @else
+                    <a class="btn btn-success" href="{{ request()->fullUrlWithQuery(['lang' => 'fr']) }}">فرنسية</a>
+                @endif
             </div>
         </div>
     </div>

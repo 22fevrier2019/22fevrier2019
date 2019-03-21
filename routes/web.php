@@ -10,10 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-if (!auth()->check()) {
-    \Auth::loginUsingId(1);
-}
-// \Auth::logout();
 
 Route::get('/', 'MainController@index');
 
