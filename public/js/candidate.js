@@ -1,0 +1,1 @@
+/* candidate page Js */
