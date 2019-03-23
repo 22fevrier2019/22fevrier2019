@@ -1,0 +1,49 @@
+/* candidate page CSS */
+
+img.candidate-img {
+    border-radius: 20px;
+    width: 100%
+}
+
+.clap-hand {
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 50%;
+    height: 45px;
+}
+
+.clap-hand:hover {
+    border: 1px solid #33eb40;
+}
+
+div.card {
+    border-bottom: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 2px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 2px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.card-title a:hover {
+    text-decoration: none;
+    color: #33eb40;
+}
+
+.card-title a {
+    color: initial;
+}
+
+/*tabs*/
+.nav-tabs {
+    border-bottom-width: 2px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    font-weight: bold;
+    border-color: #fff;
+    border-bottom: 3px solid #33eb40;
+}
+
+.nav-tabs .nav-link {
+    color: #424242;
+}

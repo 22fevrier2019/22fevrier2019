@@ -25,6 +25,10 @@ Route::post('/revendication/like', 'RevendicationController@like');
 
 Route::post('/revendication/dislike', 'RevendicationController@dislike');
 
+Route::get('/candidates', 'CandidateController@index');
+
+Route::get('/candidates/{slug}', 'CandidateController@show')->name('candidat.show');
+
 Route::group(['prefix' => 'admin-panel'], function () {
     Voyager::routes();
 });
