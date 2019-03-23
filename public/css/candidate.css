@@ -15,6 +15,22 @@ img.candidate-img{
     border: 1px solid #33eb40;
 }
 
+div.card{
+    border-radius: 20px;
+    -webkit-box-shadow: 2px 5px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 5px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: 2px 5px 5px 0px rgba(0,0,0,0.5);
+}
+
+.card-title a:hover{
+    text-decoration: none;
+    color: #33eb40;
+}
+.card-title a{
+    color: initial;
+}
+
+
 /*tabs*/
 .nav-tabs {
     border-bottom-width: 2px;
